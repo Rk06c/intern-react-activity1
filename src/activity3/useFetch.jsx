@@ -1,0 +1,45 @@
+import { useState, useEffect } from "react";
+
+const useFetch = (url) => {
+    const [data, setData] = useState();
+    
+    useEffect(() => {
+        fetch(url)
+            .then((res) => res.json())
+            .then((data) => setData(data));
+    }, [url]);
+    
+    return [data];
+};
+
+export default useFetch;
+// import { useState, useEffect } from "react";
+
+// const useFetch = (url) => {
+//     const [data, setData] = useState();
+//     const [loading, setLoading] = useState(true);
+//     const [error, setError] = useState(null);
+
+//     useEffect(() => {
+//         const fetchData = async () => {
+//             setLoading(true);
+//             setError(null);
+//             try {
+//                 const response = await fetch(url);
+//                 if (!response.ok) {
+//                     throw new Error(`Error: ${response.status} ${response.statusText}`);
+//                 }
+//                 const data = await response.json();
+//                 setData(data);
+//             } catch (err) {
+//                 setError(err.message);
+//             }
+//             setLoading(false);
+//         };
+
+//         fetchData();
+//     }, [url]);
+
+//     return { data, loading, error };
+// };
+// export default useFetch;

@@ -1,0 +1,290 @@
+/* TodoList.css */
+
+/* Reset and base styles */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+} */
+
+/* Main container */
+.todo-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.todo-container h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #3498db;
+}
+
+/* Input container for adding headings */
+.input-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+}
+
+.heading-input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.heading-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.add-list-button {
+    padding: 0.8rem 1.5rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.add-list-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.add-list-button:active {
+    transform: translateY(0);
+}
+
+/* Main todo list area */
+.todo_main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Individual todo card */
+.todo-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e9ecef;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.todo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Todo heading section */
+.heading_todo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f1f3f5;
+}
+
+.heading_todo h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.delete-button-heading {
+    padding: 0.5rem 1rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.delete-button-heading:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+/* List items */
+ul {
+    list-style-type: none;
+    margin-bottom: 1.5rem;
+}
+
+.todo_inside_list {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #2ecc71;
+    transition: background-color 0.3s ease;
+}
+
+.todo_inside_list:hover {
+    background-color: #e9ecef;
+}
+
+.todo_inside_list p {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1rem;
+}
+
+/* Add list section */
+.add_list {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.list-input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.list-input:focus {
+    outline: none;
+    border-color: #2ecc71;
+    box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+}
+
+/* Empty state */
+.todo_main:empty::before {
+    content: "No todo items yet. Add a heading to get started!";
+    text-align: center;
+    color: #95a5a6;
+    font-style: italic;
+    padding: 3rem;
+    display: block;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .todo-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .todo-container h1 {
+        font-size: 2rem;
+    }
+    
+    .input-container {
+        flex-direction: column;
+    }
+    
+    .add_list {
+        flex-direction: column;
+    }
+    
+    .heading_todo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .delete-button-heading {
+        align-self: flex-end;
+    }
+}
+
+/* Animation for new items */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.todo-card {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Custom scrollbar for lists */
+ul {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+ul::-webkit-scrollbar {
+    width: 6px;
+}
+
+ul::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+ul::-webkit-scrollbar-thumb {
+    background: #bdc3c7;
+    border-radius: 3px;
+}
+
+ul::-webkit-scrollbar-thumb:hover {
+    background: #95a5a6;
+}
+
+/* Status indicators */
+.heading-input::placeholder,
+.list-input::placeholder {
+    color: #95a5a6;
+}
+
+/* Focus states for accessibility */
+button:focus,
+input:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* Disabled state for buttons */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}

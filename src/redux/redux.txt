@@ -1,0 +1,123 @@
+import React, { useState } from 'react'
+//import { useSelector, useDispatch } from 'react-redux'
+import { produce } from "immer";
+import { useDispatch, useSelector } from 'react-redux';
+import {
+     increment,
+     decrement,
+     reset ,
+     doubleIncrement,
+     incrementByAmount
+    } from './slice/counterSlice.js';
+import { addUser,removeUser } from './slice/userSlice1.js';
+
+
+export default function ReduxDemo() {
+    const counter = useSelector((state) => state.counter.value);
+    const dispatch = useDispatch();
+    const [amount , setAmount] = useState('');
+    const user = useSelector((state) => state.user.user);
+    const [formData , setFormData] = useState({
+        name:'',
+        email:'',
+        age:''
+    })
+ const handleChange=(e)=>{
+    setFormData({
+        ...formData,
+        [e.target.name]:e.target.value
+    })
+ }
+ const handleSumit=(e)=>{
+    e.preventDefault();
+    dispatch(addUser(formData))
+    setFormData({
+        name:'',
+        email:'',
+        age:''
+    })
+ }
+ console.log('user data from redux store',user);
+
+    const arr=[{
+        name:'rkumar',
+        yearOfexp:'5 years',
+        roll:'MERN stack developer'
+
+    },{
+        name:'ajay',
+        yearOfexp:'3 years',
+        roll:'frontend developer'
+    }]
+
+    const newArr= produce(arr,draft=>{
+        draft.push({
+            name:'vijay',
+            yearOfexp:'4 years',
+            roll:'backend developer'
+        })
+
+        draft[0].name='Rkumar updated'
+        draft[2].roll='Devops engineer'
+
+    })
+    console.log('newArr',newArr)
+    console.log('arr',arr)
+  return (
+    <>
+    <h1>ReduxDemo</h1>
+    <div style={{textAlign:'center0',marginTop:'50px'}}>
+        <h2>Counter: {counter}</h2>
+        <button onClick={() => dispatch(increment())} style={{marginRight:'10px'}}>Increment</button>
+        <button onClick={() => dispatch(decrement())} style={{marginRight:'10px'}}>Decrement</button>
+        <button onClick={() => dispatch(reset())} style={{marginRight:'10px'}}>Reset</button>
+        <button onClick={() => dispatch(doubleIncrement())} style={{marginRight:'10px'}}>Double Increment</button> <br />
+        <input 
+        type="number"
+        value={amount}
+        onChange={(e) => setAmount(Number(e.target.value))}
+        style={{marginTop:'20px', marginRight:'10px'}}
+        />
+        <button onClick={() => dispatch(incrementByAmount(amount))} style={{marginRight:'10px'}}>incrementByAmount</button>
+
+    </div>
+    
+    <div style={{textAlign:'center0',marginTop:'50px' ,input:{marginBottom:'10px', padding:'10px', textAlign:'center'}  }}>
+        <h2>User Management</h2>
+        <input 
+        type="text"
+        name="name"
+        placeholder='Name'
+        value={formData.name}
+        onChange={handleChange}
+        /> <br />
+        <input 
+        type="text"
+        name="email"
+        placeholder='Email'
+        value={formData.email}
+        onChange={handleChange}
+        /> <br />
+        <input 
+        type="text"
+        name="age"
+        placeholder='Age'
+        value={formData.age}
+        onChange={handleChange}
+        /> <br />
+        <button onClick={handleSumit} style={{marginTop:'10px'}}>Add User</button>
+        {/* usercard */}
+        {user && (
+            <div style={{border:'1px solid black', width:'300px', margin:'20px auto', padding:'10px'}}>
+                <h3>User Details</h3>
+                <p><strong>Name:</strong> {user.name}</p>
+                <p><strong>Email:</strong> {user.email}</p>
+                <p><strong>Age:</strong> {user.age}</p>
+                <button onClick={() => dispatch(removeUser())}>Remove User</button> 
+            </div>
+
+        )}
+    </div>
+    </>
+    )
+}
