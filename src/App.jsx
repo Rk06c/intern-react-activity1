@@ -1,7 +1,7 @@
 //import { useState } from 'react';
 import Employees from './functionComponent/employess.jsx';
 import UserCard from './functionComponent/userCard.jsx';  
-import Form from './functionComponent/form.jsx';
+import Form from './functionComponent/Form.jsx';
 import './App.css';
 import EventPlanner from './activity1/EventPlanner.jsx';
 import TodoList from './activity2/TodoList.jsx';
